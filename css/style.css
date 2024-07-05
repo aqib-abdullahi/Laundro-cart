@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+/* FIRST SECTION */
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
+
+ul {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.allservices {
+    margin: 3%;
+    width: 30%;
+    height: 5%;
+    border-radius: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #F55050;
+    border: #F55050;
+    color: #EEEEEE;
+    font-size: 105;
+}
+
+.call {
+    color: white;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 5vh;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 17px;
+    background-color: blanchedalmond;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    color: #393E46;
+    background-color: #EEEEEE;
+    box-shadow: 0 0 8px #393E46;
+    position: relative;
+}
+
+.nav-li a {
+    text-decoration: none;
+    margin: 0;
+    color: #393E46;
+    padding-right: 3dvw;
+}
+
+.phone {
+    line-height: 0;
+    color: #393E46;
+}
+
+.first-section {
+    display: flex;
+    height: 90.9vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.side-left {
+    background-color: red;
+    height: 100%;
+    width: 55%;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.side-up {
+    background-color: aqua;
+    height: 60%;
+    width: 45%;
+}
+
+.side-down {
+    background-color: #93C6E7;
+    height: 40%;
+    width: 45%;
+    text-align: center;
+    display: grid;
+    place-items: center;
+}
+
+.side-down p {
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 8% 0 0 0;
+    font-size: 2rem;
+    font-weight: bolder;
+    line-height: 0;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.side-up img {
+    height: 100%;
+    width: 100%;
+}
+
+.side-left {
+    background-color: #EEEEEE;
+    height: 87.8vh;
+    text-align: center;
+}
+
+.side-left h1 {
+    margin-top: 2rem;
+    display: block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 230%;
+}
+
+.side-left div {
+    display: inline-block;
+    width: 40%;
+    padding: 2px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.title {
+    padding-left: 20px;
+}
+
+
+/* SECOND SECTION */
+
+.section2contents p {
+    display: block;
+    padding: 0 10px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.section2contents {
+    display: inline-block;
+    height: auto;
+    width: 170px;
+    padding: 20px;
+}
+
+.second-section {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: 70vh;
+    background-color: #93C6E7;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #EEEEEE;
+    font-weight: 800;
+}
+
+.secondsectionp {
+    padding: 1% 20%;
+    font-size: 1.2rem;
+}
+
+.second-section h3 {
+    font-family: 'Josefin Sans', sans-serif;
+    padding-top: 0px;
+    margin-top: 0px;
+    font-size: 150%;
+    padding-bottom: 10px;
+}
+
+.section2contents p {
+    display: block;
+    padding: 0 10px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.section2contents {
+    display: inline-block;
+    height: auto;
+    width: 170px;
+    padding: 20px;
+    text-align: center;
+}
+
+.schedulebtn {
+    width: 15%;
+    padding: 1% 0;
+    border-radius: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #EEEEEE;
+    border: #EEEEEE;
+    color: #f48484;
+    font-size: 80%;
+    font-weight: 900;
+    margin-top: 20px;
+}
+
+.fa {
+    height: 90px;
+    width: 90px;
+    background-color: #EEEEEE;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.fa i {
+    color: #F55050;
+    position: relative;
+    top: 35px;
+}
+
+
+/* THIRD SECTION */
+
+.section3half {
+    height: 100vh;
+    width: 50%;
+    background-color: #EEEEEE;
+    float: left;
+}
+
+.section3half2 {
+    height: 100vh;
+    width: 50%;
+    background-color: #EEEEEE;
+    float: right;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.section3half2 button {
+    position: relative;
+    left: 40%;
+    width: 30%;
+    height: 5%;
+    border-radius: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #F55050;
+    border: #F55050;
+    color: #EEEEEE;
+    font-size: 105;
+}
+
+.section3half2 h2 {
+    text-align: center;
+    padding-top: 8%;
+    font-size: 2rem;
+    padding-bottom: 3%;
+}
+
+.section3half2 h4 {
+    font-size: 1.5rem;
+}
+
+.section3half2 p {
+    font-size: 1rem;
+    padding-bottom: 2rem;
+    padding-right: 2rem;
+}
+
+.s3div {
+    width: 10%;
+    height: 80px;
+    float: left;
+    padding-left: 10%;
+}
+
+.s3div i {
+    color: #F2CD5C;
+}
+
+.d1 {
+    width: 50%;
+    height: 50%;
+    order: 1;
+}
+
+.d1image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.d2 {
+    width: 50%;
+    height: 40%;
+    background-color: #F2CD5C;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    order: 3;
+}
+
+.d2 h2 {
+    font-size: 3rem;
+    color: #EEEEEE;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+.d2 p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #EEEEEE;
+    margin-top: 0;
+}
+
+.d2 button {
+    padding: 4% 8%;
+    border-radius: 50px;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #EEEEEE;
+    border: #EEEEEE;
+    color: #F2CD5C;
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.d3 {
+    width: 50%;
+    height: 50%;
+    background-color: #c6cbcf;
+    order: 2;
+    text-align: center;
+}
+
+.d3div {
+    height: 50%;
+    width: 100%;
+    position: relative;
+    top: 25%;
+}
+
+.d3 p {
+    font-family: 'Josefin Sans', sans-serif;
+    padding-left: 20%;
+    padding-right: 20%;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.d3 i {
+    color: #579BB1;
+}
+
+.d4 {
+    width: 50%;
+    height: 60%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0 0 50% 0;
+    order: 4;
+}
+
+.d4image {
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 50% 0;
+    object-fit: cover;
+}
+
+.curve-box {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+/* LAST SECTION  */
+
+.last-section {
+    height: auto;
+    width: 100%;
+    font-family: 'Josefin Sans', sans-serif;
+    background-color: #f19393;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.quotes {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #EEEEEE;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    margin-top: 4rem;
+}
+
+.last-quote {
+    margin-bottom: 5rem;
+    margin-top: 5rem;
+}
+
+.quotes i {
+    padding: 30%;
+}
+
+.quotep {
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.mail {
+    width: 70%;
+    border-radius: 25px;
+    border: #c6cbcf;
+    background-color: #c6cbcf;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #747575;
+    margin-bottom: 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    margin-left: 2rem;
+}
+
+.newsletter {
+    background-color: #EEEEEE;
+    width: 40%;
+    height: auto;
+    padding-left: 1rem;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+    border-radius: 90px 0 0 0;
+    margin: 0;
+    align-self: flex-end;
+}
+
+.newsletter h6 {
+    padding-left: 4rem;
+    font-size: 1rem;
+}
+
+.btn {
+    width: 120px;
+    border-radius: 25px;
+    border: #579BB1;
+    background-color: #579BB1;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bolder;
+    display: grid;
+    color: #EEEEEE;
+    padding: .7rem .9rem 0.7rem .9rem;
+    margin-left: 2rem;
+}
