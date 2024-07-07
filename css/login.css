@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+}
+
+.container {
+    width: 50%;
+    height: 100%;
+    background-color: #EEEEEE;
+    display: grid;
+    place-items: center;
+}
+
+.content {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.display {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    background-image: url(../images/machines.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 2rem;
+}
+
+.inputs {
+    padding: 5% 20% 5% 20%;
+}
+
+input {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.input {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 95%;
+    font-size: 1.2rem;
+    padding-top: 12px;
+    padding-bottom: 7px;
+    padding-left: 4%;
+    border-radius: 6px;
+    border: none;
+}
+
+.login-btn {
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login {
+    width: 100%;
+    padding: 9px;
+    font-size: 1.1rem;
+    background-color: #F55050;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.login:hover {
+    cursor: pointer;
+}
+
+h5 {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+h5 a {
+    color: rgb(5, 152, 103);
+    text-decoration: none;
+}
