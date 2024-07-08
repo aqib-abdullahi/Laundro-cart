@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <title>Laundro-cart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/0f3c732ecf.js" crossorigin="anonymous"></script>
 </head>
 
@@ -46,7 +47,7 @@
             <button class="allservices">ALL SERVICES</button>
         </div>
         <div class="side-up">
-            <img class="stacked" src="images/stack of whites.jpg" alt="stacked whites">
+            <img class="stacked" src="{% static 'images/stack of whites.jpg' %}" alt="stacked whites">
         </div>
         <div class="side-down">
             <div class="call-us">
@@ -77,12 +78,12 @@
             <p>3. We Drop Off</p>
         </div>
         <br>
-        <button class="schedulebtn">SCHEDULE A PICKUP</button>
+        <a href="{% url 'signup' %}" class="schedulebtn"> SCHEDULE A PICKUP</a>
     </section>
     <section class="allsection3">
         <section class="section3half">
             <div class="curve-box">
-                <div class="d1"><img class="d1image" src="images/hanged.jpeg" alt="hanged clothes"></div>
+                <div class="d1"><img class="d1image" src="{% static 'images/hanged.jpeg' %}" alt="hanged clothes"></div>
                 <div class="d2">
                     <h2>10%</h2><br>
                     <p>Off Your First 15Kg</p>
@@ -95,7 +96,7 @@
                     <p>Don't Get Up. We Can Do It.</p>
                 </div>
                 <div class="d4">
-                    <img class="d4image" src="images/pressed.jpg" alt="pressed clothes on a chair">
+                    <img class="d4image" src="{% static 'images/pressed.jpg' %}" alt="pressed clothes on a chair">
                 </div>
             </div>
         </section>

@@ -192,8 +192,8 @@ ul {
 }
 
 .schedulebtn {
-    width: 15%;
-    padding: 1% 0;
+    width: 20%;
+    padding: 1% 2%;
     border-radius: 30px;
     font-family: 'Josefin Sans', sans-serif;
     background-color: #EEEEEE;
@@ -202,6 +202,11 @@ ul {
     font-size: 80%;
     font-weight: 900;
     margin-top: 20px;
+    text-decoration: none;
+}
+
+.schedulebtn:hover {
+    cursor: pointer;
 }
 
 .fa {
