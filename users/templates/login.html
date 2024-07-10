@@ -13,12 +13,18 @@
     <div class="content">
         <div class="container">
             <h2><b>Welcome Back!</b></h2>
-            <div class="inputs">
-                <form action="" method="post">
-                    <input type="text" name="Email" placeholder="Email" id="email" class="input" required>
-                    <input type="password" name="Password" placeholder="Password" id="password" class="input" required>
+            <div class="inputs" >
+                {% if form.errors %}
+                <p style="float: left; margin: 0; padding: 0; color: white; font-size: 1.1rem; text-align: center; width: 50%; position: absolute; top: 0; left: 0; background-color: red;">Invalid email or password!</p>
+                {% endif %}
+                <form action="{% url 'login' %}" method="post" style="width: 20rem;" method="post">
+                    {% csrf_token %}
+                    <label>Email:</label>
+                    {{ form.username }}
+                    <label>Password:</label>
+                    {{ form.password }}
                     <div class="login-btn">
-                        <input type="submit" value="Login" class="login">
+                        <input type="submit" value="Log in" class="login">
                     </div>
                 </form>
             </div>

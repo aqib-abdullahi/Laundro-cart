@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     <title>Signup</title>
 </head>
@@ -14,12 +14,18 @@
         <div class="container">
             <h2><b>Signup</b></h2>
             <div class="inputs">
-                <form action="" method="post">
-                    <input type="text" name="First name" placeholder="First name" id="email" class="input" required>
-                    <input type="text" name="Last name" placeholder="Last name" id="email" class="input" required>
-                    <input type="text" name="Email" placeholder="Enter your email" id="email" class="input" required>
-                    <input type="password" name="Password" placeholder="Create a password" id="password" class="input" required>
-                    <input type="password" name="Confirm password" placeholder="Confirm your password" id="password" class="input" required>
+                <form action="{% url 'signup' %}" method="post">
+                    {% csrf_token %}
+                    <label>First name:</label>
+                    {{ form.first_name }}
+                    <label>Last name:</label>
+                    {{ form.last_name }}
+                    <label>Email:</label>
+                    {{ form.email }}
+                    <label>Create password:</label>
+                    {{ form.password1 }}
+                    <label>Confirm password:</label>
+                    {{ form.password2 }}
                     <div class="Signup-btn">
                         <input type="submit" value="Signup" class="signup">
                     </div>

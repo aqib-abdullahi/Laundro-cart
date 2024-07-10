@@ -34,7 +34,7 @@ h2 {
 }
 
 .inputs {
-    padding: 5% 20% 5% 20%;
+    padding: 5% 10% 5% 10%;
 }
 
 input {
@@ -48,9 +48,14 @@ input {
     font-size: 1.2rem;
     padding-top: 12px;
     padding-bottom: 7px;
-    padding-left: 4%;
+    padding-left: 13px;
+    padding-right: 13px;
     border-radius: 6px;
     border: none;
+}
+
+form {
+    width: 4rem;
 }
 
 .login-btn {
@@ -85,4 +90,16 @@ h5 {
 h5 a {
     color: rgb(5, 152, 103);
     text-decoration: none;
+}
+
+form ul li {
+    position: absolute;
+    color: red;
+    background-color: green;
+    list-type: none;
+}
+
+.errorr {
+    color: red;
+
 }
