@@ -12,25 +12,30 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=250,
                                  label='First name:',
                                  required=True,
-                                 widget=forms.TextInput(attrs={'placeholder':"First name", 'class':'input'})
+                                 widget=forms.TextInput(attrs={'placeholder':"First name",
+                                                               'class':'input', 'id': 'firstname'})
                                 )
     last_name = forms.CharField(max_length=250,
                                 label='Last name:',
                                 required=True,
-                                widget=forms.TextInput(attrs={'placeholder':"Last name", 'class':'input'})
+                                widget=forms.TextInput(attrs={'placeholder':"Last name",
+                                                              'class':'input', 'id': 'lastname'})
                                )
     email = forms.EmailField(max_length=250,
                              label='Email:',
                              required=True,
-                             widget=forms.EmailInput(attrs={'placeholder':"Email", 'class':'input', 'name':'email'})
+                             widget=forms.EmailInput(attrs={'placeholder':"Email",
+                                                            'class':'input', 'name':'email', 'id':'email'})
                             )
     password1 = forms.CharField(strip=False,
                                 label='Password:',
-                                widget=forms.PasswordInput(attrs={'placeholder':"Create Password", 'class':'input', 'id':'Password1'})
+                                widget=forms.PasswordInput(attrs={'placeholder':"Create Password",
+                                                                  'class':'input', 'id':'password1'})
                                )
     password2 = forms.CharField(strip=False,
                                 label='Confirm Password:',
-                                widget = forms.PasswordInput(attrs={'placeholder': "Confirm Password", 'class': 'input', 'id':'Password2'})
+                                widget = forms.PasswordInput(attrs={'placeholder': "Confirm Password",
+                                                                    'class': 'input', 'id':'password2'})
                                )
 
     class Meta:

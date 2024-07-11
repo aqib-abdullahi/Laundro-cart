@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html> {% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <script src="{% static 'js/signup.js' %}" defer></script>
     <title>Signup</title>
 </head>
 
@@ -14,18 +14,28 @@
         <div class="container">
             <h2><b>Signup</b></h2>
             <div class="inputs">
-                <form action="{% url 'signup' %}" method="post">
+                <form action="{% url 'signup' %}" method="post" class="signupForm">
                     {% csrf_token %}
-                    <label>First name:</label>
-                    {{ form.first_name }}
-                    <label>Last name:</label>
-                    {{ form.last_name }}
-                    <label>Email:</label>
-                    {{ form.email }}
-                    <label>Create password:</label>
-                    {{ form.password1 }}
-                    <label>Confirm password:</label>
-                    {{ form.password2 }}
+                    <div class="input-control">
+                        <label>First name:</label> {{ form.first_name }}
+                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;"></div>
+                    </div>
+                    <div class="input-control">
+                        <label>Last name:</label> {{ form.last_name }}
+                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;"></div>
+                    </div>
+                    <div class="input-control">
+                        <label>Email:</label> {{ form.email }}
+                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;"></div>
+                    </div>
+                    <div class="input-control">
+                        <label>Create password:</label> {{ form.password1 }}
+                        <div class="error" style="color: #ff3860; font-size: .9rem; line-height: 2px; margin-bottom: 5px;"></div>
+                    </div>
+                    <div class="input-control">
+                        <label>Confirm password:</label> {{ form.password2 }}
+                        <div class="error" style="color: #ff3860; font-size: .9rem; line-height: 2px; margin-bottom: 5px;"></div>
+                    </div>
                     <div class="Signup-btn">
                         <input type="submit" value="Signup" class="signup">
                     </div>
