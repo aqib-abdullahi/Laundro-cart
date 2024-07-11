@@ -18,23 +18,27 @@
                     {% csrf_token %}
                     <div class="input-control">
                         <label>First name:</label> {{ form.first_name }}
-                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;"></div>
+                        <div class="error" style="color: #ff3860; font-size: .9rem;"></div>
                     </div>
                     <div class="input-control">
                         <label>Last name:</label> {{ form.last_name }}
-                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;"></div>
+                        <div class="error" style="color: #ff3860; font-size: .9rem;"></div>
                     </div>
                     <div class="input-control">
                         <label>Email:</label> {{ form.email }}
-                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;"></div>
+                        <div class="error" style="color: #ff3860; font-size: .9rem; padding-bottom: 5px;">
+                            {% if form.errors %}
+                            <p style="margin-top: 0; margin-bottom: 10px; line-height: 14px; font-size: .9rem;">Email already exists!</p>
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="input-control">
                         <label>Create password:</label> {{ form.password1 }}
-                        <div class="error" style="color: #ff3860; font-size: .9rem; line-height: 2px; margin-bottom: 5px;"></div>
+                        <div class="error" style="color: #ff3860; font-size: .9rem; line-height: 14px; margin-bottom: 10px; height: auto;"></div>
                     </div>
                     <div class="input-control">
                         <label>Confirm password:</label> {{ form.password2 }}
-                        <div class="error" style="color: #ff3860; font-size: .9rem; line-height: 2px; margin-bottom: 5px;"></div>
+                        <div class="error" style="color: #ff3860; font-size: .9rem; line-height: 14px; margin-bottom: 5px;"></div>
                     </div>
                     <div class="Signup-btn">
                         <input type="submit" value="Signup" class="signup">

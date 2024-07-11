@@ -30,12 +30,14 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(strip=False,
                                 label='Password:',
                                 widget=forms.PasswordInput(attrs={'placeholder':"Create Password",
-                                                                  'class':'input', 'id':'password1'})
+                                                                  'class':'input', 'id':'password1',
+                                                                  'autocomplete': 'new-password'})
                                )
     password2 = forms.CharField(strip=False,
                                 label='Confirm Password:',
                                 widget = forms.PasswordInput(attrs={'placeholder': "Confirm Password",
-                                                                    'class': 'input', 'id':'password2'})
+                                                                    'class': 'input', 'id':'password2',
+                                                                    'autocomplete': 'new-password'})
                                )
 
     class Meta:
