@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="content">
+        <div class="container">
+            <h2><b>Welcome Back!</b></h2>
+            <div class="inputs" >
+                {% if form.errors %}
+                <p style="float: left; margin: 0; padding: 0; color: white; font-size: 1.1rem; text-align: center; width: 50%; position: absolute; top: 0; left: 0; background-color: red;">Invalid email or password!</p>
+                {% endif %}
+                <form action="{% url 'login' %}" method="post" style="width: 20rem;" method="post">
+                    {% csrf_token %}
+                    <label>Email:</label>
+                    {{ form.username }}
+                    <label>Password:</label>
+                    {{ form.password }}
+                    <div class="login-btn">
+                        <input type="submit" value="Log in" class="login">
+                    </div>
+                </form>
+            </div>
+            <h5 style="font-size: 1.1rem;">Don't have an account? <a href="{% url 'signup' %}">Signup</a></h5>
+        </div>
+        <div class="display">
+        </div>
+    </div>
+
+</body>
+
+</html>

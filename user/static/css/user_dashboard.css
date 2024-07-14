@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+body {
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+aside {
+    height: 100vh;
+    width: 20vw;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: #EEEEEE;
+    text-align: center;
+    max-width: 180px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.1rem;
+}
+
+a .pickup {
+    border-top: 1px solid rgb(182, 178, 178);
+    border-bottom: 1px solid rgb(182, 178, 178);
+    border-left: none;
+    border-right: none;
+}
+
+.user,
+.pickup,
+.profile,
+.notifications,
+.logout {
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.user {
+    height: 40%;
+}
+
+.pickup,
+.profile,
+.notifications,
+.logout {
+    height: 25px;
+    border-left: none;
+    border-right: none;
+    padding: 10px 0;
+}
+
+a .profile {
+    border-top: none;
+    border-bottom: 1px solid rgb(182, 178, 178);
+    border-left: none;
+    border-right: none;
+}
+
+a .notifications {
+    border-bottom: 1px solid rgb(182, 178, 178);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+a .logout {
+    border-bottom: 1px solid rgb(182, 178, 178);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.pickup:hover,
+.profile:hover,
+.notifications:hover,
+.logout:hover {
+    height: 25px;
+    border-left: none;
+    border-right: none;
+    padding: 10px 0;
+    cursor: pointer;
+    background-color: rgb(26, 26, 26);
+    color: #EEEEEE;
+    transition: 0.4s ease;
+}
