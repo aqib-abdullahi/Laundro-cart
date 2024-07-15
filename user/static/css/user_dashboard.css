@@ -10,15 +10,15 @@ aside {
     position: fixed;
     display: flex;
     flex-direction: column;
-    background-color: #EEEEEE;
+    background-color: #f9f9f9;
     text-align: center;
     max-width: 180px;
+    min-width: 110px;
 }
 
 a {
     text-decoration: none;
     color: black;
-    font-weight: bolder;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1rem;
 }

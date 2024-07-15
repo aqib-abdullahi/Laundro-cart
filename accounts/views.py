@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from . import forms
 from django.contrib import messages
@@ -31,7 +31,7 @@ def view_login(request):
             if user is not None:
                 login(request, user)
                 if not user.is_superuser:
-                    return render(request, 'user_dashboard.html')
+                    return redirect('dashboard')
                 return HttpResponse("successfully logged ib!")
             else:
                 messages.error(request, 'Invalid email or password')
@@ -40,3 +40,7 @@ def view_login(request):
     else:
         form = forms.LoginForm()
     return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
