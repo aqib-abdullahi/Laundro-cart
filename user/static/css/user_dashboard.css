@@ -12,8 +12,8 @@ aside {
     flex-direction: column;
     background-color: #f9f9f9;
     text-align: center;
-    max-width: 180px;
-    min-width: 110px;
+    border-right: 1px solid rgb(182, 178, 178);
+    margin-right: 30px;
 }
 
 a {
@@ -87,4 +87,82 @@ a .logout {
     background-color: rgb(26, 26, 26);
     color: #EEEEEE;
     transition: 0.4s ease;
+}
+
+
+/* RIGHT SIDE */
+
+.dash-contents {
+    height: 100vh;
+    background-color: #f9f9f9;
+    width: 80vw;
+    float: right;
+}
+
+.profile-settings {
+    height: auto;
+    margin: 60px auto;
+    padding-left: 40px;
+    padding-right: 0;
+}
+
+.inputs {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fname,
+.lname,
+.mail,
+.pnumber,
+.address {
+    margin: 20px 0px 10px 0;
+    width: 40%;
+}
+
+input {
+    width: 100%;
+    padding: 7px 14px;
+    margin-top: 5px;
+    font-size: 1.1rem;
+    font-family: 'Josefin Sans', sans-serif;
+    border-radius: 3px;
+    border: 1px #c2c2c2 solid;
+}
+
+label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+}
+
+.buttons {
+    margin-top: 50px;
+}
+
+.update {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+    padding: 5px 15px;
+    border-radius: 6px;
+    border: none;
+    background-color: rgb(73, 73, 73);
+    color: #EEEEEE;
+}
+
+.cancel {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+    padding: 5px 15px;
+    border-radius: 6px;
+    border: none;
+    background-color: rgb(183, 183, 183);
+}
+
+.update:hover,
+.cancel:hover {
+    cursor: pointer;
 }
