@@ -1,0 +1,47 @@
+{% extends 'base_user_dashboard.html' %}
+
+{% block title  %}
+Profile
+{% endblock %}
+
+{% block content %}
+<div class="dash-contents">
+        <div class="profile-settings">
+            <h1>Profile</h1>
+
+            <div class="inputs">
+                <div class="fname">
+                    <label for="first name">First Name</label><br>
+                    <input type="text">
+                </div>
+
+                <div class="lname">
+                    <label for="Last name">Last Name</label><br>
+                    <input type="text">
+                </div>
+                <br>
+                <div class="mail">
+                    <label for="Email">Email</label><br>
+                    <input type="text">
+                </div>
+
+                <div class="pnumber">
+                    <label for="Phone number">Phone number</label><br>
+                    <input type="text">
+                </div>
+                <br>
+                <div class="address">
+                    <label for="Address">Address</label><br>
+                    <input type="text">
+                </div>
+
+
+            </div>
+            <div class="buttons">
+                <button class="update">Update</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+
+</div>
+{% endblock %}

@@ -6,7 +6,7 @@ body {
 
 aside {
     height: 100vh;
-    width: 20vw;
+    width: 15vw;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -24,8 +24,8 @@ a {
 }
 
 a .pickup {
-    border-top: 1px solid rgb(182, 178, 178);
-    border-bottom: 1px solid rgb(182, 178, 178);
+    /* border-top: 1px solid rgb(182, 178, 178);
+    border-bottom: 1px solid rgb(182, 178, 178); */
     border-left: none;
     border-right: none;
 }
@@ -49,27 +49,31 @@ a .pickup {
 .notifications,
 .logout {
     height: 25px;
+    width: 90%;
+    margin: 0 auto;
     border-left: none;
     border-right: none;
     padding: 10px 0;
+    font-size: 0.9rem;
+    border-radius: 10px;
 }
 
 a .profile {
     border-top: none;
-    border-bottom: 1px solid rgb(182, 178, 178);
+    /* border-bottom: 1px solid rgb(182, 178, 178); */
     border-left: none;
     border-right: none;
 }
 
 a .notifications {
-    border-bottom: 1px solid rgb(182, 178, 178);
+    /* border-bottom: 1px solid rgb(182, 178, 178); */
     border-left: none;
     border-right: none;
     border-top: none;
 }
 
 a .logout {
-    border-bottom: 1px solid rgb(182, 178, 178);
+    /* border-bottom: 1px solid rgb(182, 178, 178); */
     border-top: none;
     border-left: none;
     border-right: none;
@@ -84,8 +88,10 @@ a .logout {
     border-right: none;
     padding: 10px 0;
     cursor: pointer;
-    background-color: rgb(26, 26, 26);
-    color: #EEEEEE;
+    /* background-color: rgb(26, 26, 26); */
+    background-color: #bdbcbcc3;
+    /* color: #EEEEEE; */
+    color: black;
     transition: 0.4s ease;
 }
 
@@ -95,7 +101,7 @@ a .logout {
 .dash-contents {
     height: 100vh;
     background-color: #f9f9f9;
-    width: 80vw;
+    width: 85vw;
     float: right;
 }
 
