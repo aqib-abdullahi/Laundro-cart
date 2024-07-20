@@ -24,8 +24,6 @@ a {
 }
 
 a .pickup {
-    /* border-top: 1px solid rgb(182, 178, 178);
-    border-bottom: 1px solid rgb(182, 178, 178); */
     border-left: none;
     border-right: none;
 }
@@ -60,20 +58,17 @@ a .pickup {
 
 a .profile {
     border-top: none;
-    /* border-bottom: 1px solid rgb(182, 178, 178); */
     border-left: none;
     border-right: none;
 }
 
 a .notifications {
-    /* border-bottom: 1px solid rgb(182, 178, 178); */
     border-left: none;
     border-right: none;
     border-top: none;
 }
 
 a .logout {
-    /* border-bottom: 1px solid rgb(182, 178, 178); */
     border-top: none;
     border-left: none;
     border-right: none;
@@ -88,9 +83,7 @@ a .logout {
     border-right: none;
     padding: 10px 0;
     cursor: pointer;
-    /* background-color: rgb(26, 26, 26); */
     background-color: #bdbcbcc3;
-    /* color: #EEEEEE; */
     color: black;
     transition: 0.4s ease;
 }
