@@ -142,23 +142,29 @@ label {
     margin-top: 50px;
 }
 
+input .update,
+input .cancel {
+}
+
 .update {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1rem;
-    padding: 5px 15px;
+    padding: 10px 15px;
     border-radius: 6px;
     border: none;
     background-color: rgb(73, 73, 73);
     color: #EEEEEE;
+    width: auto;
 }
 
 .cancel {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1rem;
-    padding: 5px 15px;
+    padding: 10px 15px;
     border-radius: 6px;
     border: none;
     background-color: rgb(183, 183, 183);
+    width: auto;
 }
 
 .update:hover,
