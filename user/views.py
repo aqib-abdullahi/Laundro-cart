@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import ProfileUpdateForm
+from core.models import Laundry
 
 
 @login_required
@@ -9,7 +10,8 @@ def user_dashboard(request):
 
 @login_required
 def pickup(request):
-    return render(request, 'pickup.html')
+    laundry_items = Laundry.get_all_laundry()
+    return render(request, 'pickup.html', {'laundry_items': laundry_items})
 
 @login_required
 def profile(request):

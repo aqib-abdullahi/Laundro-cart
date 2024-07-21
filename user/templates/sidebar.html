@@ -1,17 +1,45 @@
 <aside>
-        <div class="user">
+    <div class="user">
 
+    </div>
+    <a href="{% url 'pickup' %}">
+        <div class="pickup {% if request.path == '/pickup/' %}active{% endif %}"><i class="fa-solid fa-truck-pickup"></i>
+            <div class="barname">Pickup</div>
         </div>
-        <a href="{% url 'pickup' %}">
-            <div class="pickup">Pickup</div>
-        </a>
-        <a href="{% url 'profile' %}">
-            <div class="profile">Profile</div>
-        </a>
-        <a href="{% url 'notifications' %}">
-            <div class="notifications">Notifications</div>
-        </a>
-        <a href="{% url 'logout' %}">
-            <div class="logout">Logout</div>
-        </a>
+    </a>
+    <a href="{% url 'profile' %}">
+        <div class="profile {% if request.path == '/profile/' %}active{% endif %}"><i class="fa-solid fa-user"></i>
+            <div class="barname">Profile</div>
+        </div>
+    </a>
+    <a href="{% url 'notifications' %}">
+        <div class="notifications {% if request.path == '/notifications/' %}active{% endif %}"><i class="fa-solid fa-bell"></i>
+            <div class="barname">Notifications</div>
+        </div>
+    </a>
+    <a href="{% url 'logout' %}">
+        <div class="logout {% if request.path == '/logout' %}active{% endif %}""><i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <div class="barname">Logout</div>
+        </div>
+    </a>
 </aside>
+<style>
+    .pickup.active,
+    .notifications.active,
+    .profile.active,
+    .logout.active {
+        background-color: rgb(178, 219, 250);
+    }
+    
+    .profile,
+    .notifications,
+    .logout,
+    .pickup {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .barname {
+        width: 80px;
+    }
+</style>

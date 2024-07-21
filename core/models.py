@@ -37,10 +37,10 @@ class Laundry(models.Model):
         return Laundry.objects.all()
 
     @staticmethod
-    def get_all_laundry_by_categoryid(category_id):
+    def get_all_laundry_by_category_name(category_name):
         """returns all laundry based on a category id"""
-        if category_id:
-            return Laundry.objects.filter(category=category_id)
+        if category_name:
+            return Laundry.objects.filter(category=category_name)
         else:
             return Laundry.get_all_laundry()
 
