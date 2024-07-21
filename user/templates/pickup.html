@@ -4,10 +4,11 @@
         <h1>Pickup</h1>
         <div class="pickup-container">
             <div class="tab">
-                <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Men')">Men</button>
-                <button class="tablinks" onclick="openTab(event, 'Women')">Women</button>
-                <button class="tablinks" onclick="openTab(event, 'Kids')">Kids</button>
-                <button class="tablinks" onclick="openTab(event, 'Others')">Others</button>
+                <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Men')"><i class="las la-male" style="font-size: 24px;"></i>Men</button>
+                <button class="tablinks" onclick="openTab(event, 'Women')"><i class="las la-female" style="font-size: 24px; margin-right: 5px;"></i>Women</button>
+                <button class="tablinks" onclick="openTab(event, 'Kids')"><i class="las la-child" style="font-size: 24px; margin-right: 5px;"></i>Kids</button>
+                <button class="tablinks" onclick="openTab(event, 'Others')"><i class="las la-ellipsis-h" style="font-size: 24px; margin-right: 5px;"></i>Others</button>
+                <button style="float: right; padding: 10px 16px;"><i class="las la-truck-loading" style="font-size: 33px;"></i></button>
             </div>
 
             <div id="Men" class="tabcontent">
@@ -18,12 +19,11 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="item-description">{{ item.description }}</div>
                     <div class="item-count">
-                        <button class="add">+</button>
-                        <h4 class="counter">--</h4>
-                        <button class="remove">-</button>
-
+                        <button class="btn decrease" data-id="{{ item.id }}"><i class="fa-solid fa-minus fa-2xs"></i></button>
+                        <p class="counter" data-id="{{ item.id }}">0</p>
+                        <button class="btn increase" data-id="{{ item.id }}"><i class="fa-solid fa-plus fa-2xs"></i></button>
                     </div>
-                    <div class="item-cost">{{ item.price }}</div>
+                    <div class="item-cost">N{{ item.price }}</div>
                 </div>
 
                 {% endif %} {% endfor %} {% endif %}
@@ -36,12 +36,11 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="item-description">{{ item.description }}</div>
                     <div class="item-count">
-                        <button class="add">+</button>
-                        <h4 class="counter">--</h4>
-                        <button class="remove">-</button>
-
+                        <button class="btn decrease" data-id="{{ item.id }}"><i class="fa-solid fa-minus fa-2xs"></i></button>
+                        <p class="counter" data-id="{{ item.id }}">0</p>
+                        <button class="btn increase" data-id="{{ item.id }}"><i class="fa-solid fa-plus fa-2xs"></i></button>
                     </div>
-                    <div class="item-cost">{{ item.price }}</div>
+                    <div class="item-cost">N{{ item.price }}</div>
                 </div>
 
                 {% endif %} {% endfor %} {% endif %}
@@ -54,12 +53,11 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="item-description">{{ item.description }}</div>
                     <div class="item-count">
-                        <button class="add">+</button>
-                        <h4 class="counter">--</h4>
-                        <button class="remove">-</button>
-
+                        <button class="btn decrease" data-id="{{ item.id }}"><i class="fa-solid fa-minus fa-2xs"></i></button>
+                        <p class="counter" data-id="{{ item.id }}">0</p>
+                        <button class="btn increase" data-id="{{ item.id }}"><i class="fa-solid fa-plus fa-2xs"></i></button>
                     </div>
-                    <div class="item-cost">{{ item.price }}</div>
+                    <div class="item-cost">N{{ item.price }}</div>
                 </div>
 
                 {% endif %} {% endfor %} {% endif %}
@@ -72,12 +70,12 @@
                     <div class="item-name">{{ item.name }}</div>
                     <div class="item-description">{{ item.description }}</div>
                     <div class="item-count">
-                        <button class="add">+</button>
-                        <h4 class="counter">--</h4>
-                        <button class="remove">-</button>
+                        <button class="btn decrease" data-id="{{ item.id }}"><i class="fa-solid fa-minus fa-2xs"></i></button>
+                        <p class="counter" data-id="{{ item.id }}">0</p>
+                        <button class="btn increase" data-id="{{ item.id }}"><i class="fa-solid fa-plus fa-2xs"></i></button>
 
                     </div>
-                    <div class="item-cost">{{ item.price }}</div>
+                    <div class="item-cost">N{{ item.price }}</div>
                 </div>
 
                 {% endif %} {% endfor %} {% endif %}
@@ -88,11 +86,20 @@
 
 </div>
 <style>
-    .add,
-    .remove {
+    .btn {
         height: 30px;
         width: 30px;
         text-align: center;
+        font-size: 1.6rem;
+        font-weight: 900;
+        font-family: 'Josefin Sans', sans-serif;
+        color: #757373;
+        border: none;
+        background-color: #ccc;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
     }
     
     .counter {
@@ -129,7 +136,7 @@
     
     .item-description {
         background-color: #f1f1f1;
-        width: 40%;
+        width: 35%;
         display: grid;
         place-items: center;
         text-align: center;
@@ -137,7 +144,7 @@
     
     .item-cost {
         background-color: #f1f1f1;
-        width: 10%;
+        width: 20%;
         display: grid;
         place-items: center;
         text-align: center;
@@ -153,7 +160,7 @@
     
     .item-count {
         background-color: #f1f1f1;
-        width: 10%;
+        width: 15%;
         margin: 0 auto;
         text-align: center;
         display: flex;
@@ -215,6 +222,26 @@
     }
 </style>
 <script>
+    const btns = document.querySelectorAll(".btn");
+
+    btns.forEach(function(button) {
+        button.addEventListener("click", function(buttons) {
+            const itemId = this.getAttribute("data-id");
+            const counterElement = document.querySelector(`.counter[data-id="${itemId}"]`);
+            let counter = parseInt(counterElement.textContent, 10);
+            if (this.classList.contains('increase')) {
+                counter++;
+            } else if (this.classList.contains('decrease')) {
+                if (counter > 0) {
+                    counter--;
+                }
+            } else {
+                counter = 0;
+            }
+            counterElement.textContent = counter;
+        });
+    });
+
     document.getElementById("defaultOpen").click()
 
     function openTab(event, tabName) {
