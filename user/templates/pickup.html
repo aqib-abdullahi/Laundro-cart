@@ -2,17 +2,23 @@
 <div class="dash-contents">
     <div class="profile-settings">
         <h1>Pickup</h1>
+        <div class="tab">
+            <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Men')"><i class="las la-male" style="font-size: 24px;"></i>Men</button>
+            <button class="tablinks" onclick="openTab(event, 'Women')"><i class="las la-female" style="font-size: 24px; margin-right: 5px;"></i>Women</button>
+            <button class="tablinks" onclick="openTab(event, 'Kids')"><i class="las la-child" style="font-size: 24px; margin-right: 5px;"></i>Kids</button>
+            <button class="tablinks" onclick="openTab(event, 'Others')"><i class="las la-ellipsis-h" style="font-size: 24px; margin-right: 5px;"></i>Others</button>
+            <button class="preview-count" style="float: right; padding: 10px 16px;"><i class="las la-truck-loading" style="font-size: 33px;"></i></button>
+        </div>
         <div class="pickup-container">
-            <div class="tab">
-                <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Men')"><i class="las la-male" style="font-size: 24px;"></i>Men</button>
-                <button class="tablinks" onclick="openTab(event, 'Women')"><i class="las la-female" style="font-size: 24px; margin-right: 5px;"></i>Women</button>
-                <button class="tablinks" onclick="openTab(event, 'Kids')"><i class="las la-child" style="font-size: 24px; margin-right: 5px;"></i>Kids</button>
-                <button class="tablinks" onclick="openTab(event, 'Others')"><i class="las la-ellipsis-h" style="font-size: 24px; margin-right: 5px;"></i>Others</button>
-                <button style="float: right; padding: 10px 16px;"><i class="las la-truck-loading" style="font-size: 33px;"></i></button>
-            </div>
-
             <div id="Men" class="tabcontent">
-                <h4>Men's wear</h4>
+                <h3>Men's wear</h3>
+                <div class="label">
+                    <div class="item-image-label"></div>
+                    <div class="item-name-label">Name</div>
+                    <div class="item-description-label">Description</div>
+                    <div class="item-count-label">Quantity</div>
+                    <div class="item-cost-label">Price</div>
+                </div>
                 {% if laundry_items %} {% for item in laundry_items %} {% if item.category.name == 'Men' %}
                 <div class="item">
                     <div class="item-image"><img src="{{ item.image.url }}" class="laundry-image"></div>
@@ -30,6 +36,13 @@
             </div>
             <div id="Women" class="tabcontent">
                 <h4>Women's wear</h4>
+                <div class="label">
+                    <div class="item-image-label"></div>
+                    <div class="item-name-label">Name</div>
+                    <div class="item-description-label">Description</div>
+                    <div class="item-count-label">Quantity</div>
+                    <div class="item-cost-label">Price</div>
+                </div>
                 {% if laundry_items %} {% for item in laundry_items %} {% if item.category.name == 'Women' %}
                 <div class="item">
                     <div class="item-image"><img src="{{ item.image.url }}" class="laundry-image"></div>
@@ -47,6 +60,13 @@
             </div>
             <div id="Kids" class="tabcontent">
                 <h4>kids' wear</h4>
+                <div class="label">
+                    <div class="item-image-label"></div>
+                    <div class="item-name-label">Name</div>
+                    <div class="item-description-label">Description</div>
+                    <div class="item-count-label">Quantity</div>
+                    <div class="item-cost-label">Price</div>
+                </div>
                 {% if laundry_items %} {% for item in laundry_items %} {% if item.category.name == 'Kids' %}
                 <div class="item">
                     <div class="item-image"><img src="{{ item.image.url }}" class="laundry-image"></div>
@@ -64,6 +84,13 @@
             </div>
             <div id="Others" class="tabcontent">
                 <h4>Others</h4>
+                <div class="label">
+                    <div class="item-image-label"></div>
+                    <div class="item-name-label">Name</div>
+                    <div class="item-description-label">Description</div>
+                    <div class="item-count-label">Quantity</div>
+                    <div class="item-cost-label">Price</div>
+                </div>
                 {% if laundry_items %} {% for item in laundry_items %} {% if item.category.name == 'Others' %}
                 <div class="item">
                     <div class="item-image"><img src="{{ item.image.url }}" class="laundry-image"></div>
@@ -86,6 +113,23 @@
 
 </div>
 <style>
+    .label {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        padding: 15px 10px;
+        font-size: 1rem;
+    }
+    
+    .preview-count::after {
+        background-color: red;
+        content: "0";
+        padding: 3px 5px 2px 5px;
+        font-size: 1rem;
+        position: absolute;
+        border-radius: 10px;
+    }
+    
     .btn {
         height: 30px;
         width: 30px;
@@ -123,7 +167,12 @@
         background-color: #f1f1f1;
         justify-content: space-around;
         margin-bottom: 10px;
-        border-radius: 10px;
+        border-radius: 30px;
+    }
+    
+    .item-image-label {
+        width: 150px;
+        max-width: 150px;
     }
     
     .item-image {
@@ -134,12 +183,20 @@
         object-position: center;
     }
     
+    .item-description-label {
+        width: 35%;
+    }
+    
     .item-description {
         background-color: #f1f1f1;
         width: 35%;
         display: grid;
         place-items: center;
         text-align: center;
+    }
+    
+    .item-cost-label {
+        width: 20%;
     }
     
     .item-cost {
@@ -150,12 +207,20 @@
         text-align: center;
     }
     
+    .item-name-label {
+        width: 15%;
+    }
+    
     .item-name {
         background-color: #f1f1f1;
         width: 15%;
         display: grid;
         place-items: center;
         text-align: center;
+    }
+    
+    .item-count-label {
+        width: 15%;
     }
     
     .item-count {
@@ -173,14 +238,16 @@
         height: auto;
         min-height: 50px;
         background-color: #bdbcbcc3;
-        border-radius: 10px;
+        border-radius: 30px;
     }
     
     .tab {
         overflow: hidden;
         border: 1px solid #ccc;
         background-color: #f1f1f1;
-        border-radius: 10px;
+        border-radius: 30px;
+        width: 95%;
+        margin-bottom: 10px;
     }
     
     .tab button {
@@ -193,6 +260,8 @@
         cursor: pointer;
         padding: 14px 16px;
         transition: 0.3s;
+        margin: 7px 10px;
+        border-radius: 30px;
     }
     
     .tab button:hover {
@@ -200,7 +269,7 @@
     }
     
     .tab button.active {
-        background-color: #ccc;
+        background-color: rgb(178, 219, 250);
     }
     
     .tabcontent {
@@ -209,7 +278,7 @@
         border: 1px solid #ccc;
         border-top: none;
         animation: fadeEffect 1s;
-        border-radius: 0 0 10px 10px;
+        border-radius: 30px;
     }
     
     @keyframes identifier {
