@@ -119,9 +119,71 @@
 
 </div>
 <div class="checkout-box">
-    <h1>Preview Basket</h1>
+    <div class="top">
+        <h1>Preview Basket</h1>
+        <button class="cancel-modal">&times;</button>
+    </div>
+    <div class="basket-label">
+        <div class="checkout-name-label">Name</div>
+        <div class="checkout-description-label">Description</div>
+        <div class="checkout-count-label">Quantity</div>
+        <div class="checkout-cost-label">Cost</div>
+    </div>
+    <div class="basket">
+
+    </div>
 </div>
 <style>
+    .basket-label {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .checkout-name-label {
+        width: 20%;
+    }
+    
+    .checkout-description-label {
+        width: 40%;
+    }
+    
+    .checkout-count-label {
+        width: 20%;
+    }
+    
+    .checkout-cost-label {
+        width: 20%;
+    }
+    
+    .top {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .top button {
+        height: 50px;
+        align-self: center;
+        margin-right: 25px;
+        width: 50px;
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 2rem;
+        border: none;
+        background-color: transparent;
+        border-radius: 20px;
+    }
+    
+    .top button:hover,
+    .top button:focus {
+        cursor: pointer;
+        background-color: #e3e3e3;
+        border-radius: 20px;
+        transition: all 0.7s;
+    }
+    
     .checkout-preview {
         width: 100vw;
         height: 100vh;
@@ -129,6 +191,7 @@
         opacity: .6;
         position: absolute;
         z-index: 1;
+        display: none;
     }
     
     .checkout-box {
@@ -142,10 +205,12 @@
         background-color: white;
         z-index: 2;
         border-radius: 20px;
+        display: none;
     }
     
     .checkout-box h1 {
         margin-left: 30px;
+        display: inline-block;
     }
     
     .label {
@@ -324,10 +389,44 @@
             opacity: 1;
         }
     }
+    
+    .checkout-item {
+        width: 90%;
+        margin: 5px auto;
+        height: auto;
+        background-color: #ccc;
+        padding: 20px 10px;
+        border-radius: 30px;
+    }
+    
+    .checkout-details {
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+    }
 </style>
 <script>
+    const modalOverlay = document.querySelector('.checkout-preview');
+    const modal = document.querySelector('.checkout-box')
+    const closebtn = document.querySelector('.cancel-modal');
     const btns = document.querySelectorAll(".btn");
     const previewCountButton = document.querySelector('.preview-count');
+
+    closebtn.onclick = function() {
+        modal.style.display = "none";
+        modalOverlay.style.display = "none"
+    }
+
+    modalOverlay.onclick = function() {
+        modal.style.display = "none";
+        modalOverlay.style.display = "none"
+    }
+
+    previewCountButton.onclick = function() {
+        modalOverlay.style.display = "block";
+        modal.style.display = "block";
+        updateModal();
+    }
 
     function updateCheckoutCounter() {
         let total = 0;
@@ -375,6 +474,33 @@
 
         document.getElementById(tabName).style.display = "block";
         event.currentTarget.className += " active";
+    }
+
+    function updateModal() {
+        const basket = document.querySelector('.basket');
+        basket.innerHTML = '';
+        const items = document.querySelectorAll('.item');
+
+        items.forEach(function(item) {
+            const counter = item.querySelector('.counter').textContent;
+            if (parseInt(counter, 10) > 0) {
+                const itemName = item.querySelector('.item-name').textContent;
+                const itemDescription = item.querySelector(".item-description").textContent;
+                const itemPrice = item.querySelector(".item-cost").textContent;
+
+                const checkoutItem = `
+                    <div class="checkout-item">
+                        <div class="checkout-details">
+                            <div class="checkout-name">${itemName}</div>
+                            <div class="checkout-description">${itemDescription}</div>
+                            <div class="checkout-count">${counter}</div>
+                            <div class="checkout-cost">${itemPrice}</div>
+                        </div>
+                    </div>
+                `;
+                basket.innerHTML += checkoutItem;
+            }
+        });
     }
 </script>
 {% endblock %}
