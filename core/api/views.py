@@ -6,14 +6,13 @@ from core.models import Order, Laundry
 from .serializers import OrderSerializer
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt, csrf_protect
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,logout
 
 
 @ensure_csrf_cookie
 @csrf_protect
 @api_view(['POST'])
-def get_token(request):
+def user_login_token(request):
     if request.method == 'POST':
         email = request.data.get('Email')
         password = request.data.get('Password')
@@ -22,6 +21,18 @@ def get_token(request):
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@ensure_csrf_cookie
+def user_logout_token(request):
+    if request.method == 'POST':
+        try:
+            request.user.auth_token.delete()
+            logout(request)
+            return Response({'message': 'successfully logged out'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])
 @ensure_csrf_cookie

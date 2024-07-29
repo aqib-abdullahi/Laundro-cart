@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
 from core.models import Laundry
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
 
 @login_required

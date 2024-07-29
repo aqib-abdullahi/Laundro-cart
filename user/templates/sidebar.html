@@ -17,8 +17,8 @@
             <div class="barname">Notifications</div>
         </div>
     </a>
-    <a href="{% url 'logout' %}">
-        <div class="logout {% if request.path == '/logout' %}active{% endif %}""><i class="fa-solid fa-arrow-right-from-bracket"></i>
+    <a href="" class="logoutbtn">
+        <div class="logout {% if request.path == '/logout' %}active{% endif %}"><i class="fa-solid fa-arrow-right-from-bracket"></i>
             <div class="barname">Logout</div>
         </div>
     </a>
@@ -44,3 +44,5 @@
         width: 80px;
     }
 </style>
+{% load static %}
+<script src="{% static 'js/sidebar.js' %}"></script>
