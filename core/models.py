@@ -1,5 +1,5 @@
 import datetime
-
+from django.utils import timezone
 from django.db import models
 from django.conf import settings
 
@@ -29,7 +29,7 @@ class Laundry(models.Model):
     @staticmethod
     def get_laundry_by_id(id):
         """Returns a laundry based on id"""
-        return Laundry.objects.filter(id__in=id)
+        return Laundry.objects.get(id__in=id)
 
     @staticmethod
     def get_all_laundry():
@@ -52,8 +52,8 @@ class Order(models.Model):
     cost = models.IntegerField()
     address = models.CharField(max_length=50, default='', blank=True)
     phone = models.CharField(max_length=50, default='', blank=True)
-    date = models.DateField(default=datetime.datetime.today)
-    status = models.BooleanField(default=False, choices=[
+    date = models.DateTimeField(default=timezone.make_aware(datetime.datetime.now()))
+    status = models.CharField(max_length=50, default=False, choices=[
         ('Pending', 'Pending'),
         ('Processing', 'Processing'),
         ('Completed', 'Completed'),

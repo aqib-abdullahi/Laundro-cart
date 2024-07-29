@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-{% load static %}
+<!DOCTYPE html> {% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Login</title>
 </head>
@@ -13,16 +13,14 @@
     <div class="content">
         <div class="container">
             <h2><b>Welcome Back!</b></h2>
-            <div class="inputs" >
+            <div class="inputs">
                 {% if form.errors %}
                 <p style="float: left; margin: 0; padding: 0; color: white; font-size: 1.1rem; text-align: center; width: 50%; position: absolute; top: 0; left: 0; background-color: red;">Invalid email or password!</p>
                 {% endif %}
-                <form action="{% url 'login' %}" method="post" style="width: 20rem;" method="post">
+                <form action="http://127.0.0.1:8000/api/v1/token" method="post" style="width: 20rem;" method="post" class="login-form">
                     {% csrf_token %}
-                    <label>Email:</label>
-                    {{ form.username }}
-                    <label>Password:</label>
-                    {{ form.password }}
+                    <label>Email:</label> {{ form.username }}
+                    <label>Password:</label> {{ form.password }}
                     <div class="login-btn">
                         <input type="submit" value="Log in" class="login">
                     </div>
@@ -35,5 +33,60 @@
     </div>
 
 </body>
+<script>
+    const loginForm = document.querySelector('form');
+    loginForm.addEventListener('submit', async(event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/v1/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                    'Authorization': 'Basic ' + btoa(email + ':' + password),
+                },
+                body: JSON.stringify({
+                    Email: email,
+                    Password: password
+                }),
+                credentials: 'same-origin'
+            });
+
+            const data = await response.json();
+            console.log('Response:', data);
+
+            if (response.ok) {
+                const token = data.token;
+                localStorage.setItem('token', token);
+                console.log('Token stored:', token);
+                window.location.href = '/dashboard/'
+            } else {
+                console.error('Error:', data);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+
 
 </html>

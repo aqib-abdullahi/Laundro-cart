@@ -134,7 +134,7 @@
     </div>
     <div class="proceed">
         <button class="cancel-pay">cancel</button>
-        <button class="proceed-pay">Proceed</button>
+        <button type="submit" class="proceed-pay" value="Proceed">Proceed</button>
     </div>
 </div>
 <style>
@@ -153,6 +153,7 @@
         padding: 8px 12px;
         border-radius: 5px;
         border: none;
+        cursor: pointer;
     }
     
     .cancel-pay:hover {
@@ -163,6 +164,8 @@
     .proceed-pay {
         background-color: #598d6c;
         color: white;
+        display: inline-block;
+        width: 100px;
     }
     
     .proceed-pay:hover {
@@ -536,18 +539,79 @@
                 const itemPrice = item.querySelector(".item-cost").textContent;
 
                 const checkoutItem = `
-                    <div class="checkout-item">
-                        <div class="checkout-details">
-                            <div class="checkout-name">${itemName}</div>
-                            <div class="checkout-description">${itemDescription}</div>
-                            <div class="checkout-count">${counter}</div>
-                            <div class="checkout-cost">${itemPrice}</div>
+                        <div class="checkout-item">
+                            <div class="checkout-details">
+                                <div class="checkout-name">${itemName}</div>
+                                <div class="checkout-description">${itemDescription}</div>
+                                <div class="checkout-count">${counter}</div>
+                                <div class="checkout-cost">${itemPrice}</div>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
                 basket.innerHTML += checkoutItem;
             }
         });
     }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    const requestOrder = document.querySelector('.proceed-pay');
+    requestOrder.addEventListener('click', function(event) {
+        event.preventDefault();
+        requestOrder.disabled = true;
+        const allItems = [];
+        const items = document.querySelectorAll('.item');
+        items.forEach(function(item) {
+            const counter = item.querySelector('.counter').textContent;
+            if (parseInt(counter, 10) > 0) {
+                const itemId = item.querySelector('.increase').getAttribute('data-id');
+                const itemName = item.querySelector('.item-name').textContent;
+                const itemDescription = item.querySelector('.item-description').textContent;
+                const itemPrice = item.querySelector('.item-cost').textContent;
+                const itemQuantity = parseInt(counter, 10);
+
+                allItems.push({
+                    id: itemId,
+                    name: itemName,
+                    description: itemDescription,
+                    price: itemPrice,
+                    quantity: itemQuantity
+                });
+            }
+        });
+        const token = localStorage.getItem('token');
+        fetch('http://127.0.0.1:8000/api/v1/request-pickup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                    'Authorization': `Token ${token}`
+                },
+                body: JSON.stringify({
+                    items: allItems
+                }),
+                credentials: 'include'
+            })
+            .then(response => {
+                response.text()
+            })
+            .then(data => {
+                window.location.href = '/notifications/';
+            })
+            .catch(error => console.error('Error:', error));
+    });
 </script>
 {% endblock %}

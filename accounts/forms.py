@@ -71,10 +71,10 @@ class LoginForm(AuthenticationForm):
     username = forms.EmailField(max_length=250,
                                 label='Email:',
                                 required=True,
-                                widget=forms.EmailInput(attrs={'placeholder': "Email", 'class': 'input'})
+                                widget=forms.EmailInput(attrs={'placeholder': "Email", 'class': 'input', 'id': 'email'})
                                 )
     password = forms.CharField(strip=False,
                                 label='Password:',
                                 widget=forms.PasswordInput(
-                                attrs={'placeholder': "Password", 'class': 'input', 'id': 'Password'})
+                                attrs={'placeholder': "Password", 'class': 'input', 'id': 'password'})
                                 )

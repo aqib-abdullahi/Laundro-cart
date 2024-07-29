@@ -3,8 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from . import forms
 from django.contrib import messages
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
+@ensure_csrf_cookie
 def signup(request):
     """Sign Up page"""
     if request.method == "POST":
@@ -20,6 +22,7 @@ def signup(request):
     context = {'form': form}
     return render(request, 'signup.html', context)
 
+@ensure_csrf_cookie
 def view_login(request):
     """Log in page"""
     if request.method == "POST":
