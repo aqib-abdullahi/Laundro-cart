@@ -1,25 +1,27 @@
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from core.models import Order, Laundry
 from .serializers import OrderSerializer
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt, csrf_protect
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate,logout
+from django.contrib.auth import authenticate,logout, login
 
 
-@ensure_csrf_cookie
-@csrf_protect
+
 @api_view(['POST'])
+@permission_classes([AllowAny])
+@ensure_csrf_cookie
 def user_login_token(request):
     if request.method == 'POST':
         email = request.data.get('Email')
         password = request.data.get('Password')
         user =  authenticate(username=email, password=password)
         if user:
+            login(request, user)
             token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
+            return Response({'token': token.key, 'SuperRole': user.is_superuser}, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])

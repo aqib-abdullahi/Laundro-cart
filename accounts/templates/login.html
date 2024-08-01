@@ -17,7 +17,7 @@
                 {% if form.errors %}
                 <p style="float: left; margin: 0; padding: 0; color: white; font-size: 1.1rem; text-align: center; width: 50%; position: absolute; top: 0; left: 0; background-color: red;">Invalid email or password!</p>
                 {% endif %}
-                <form action="http://127.0.0.1:8000/api/v1/token" method="post" style="width: 20rem;" method="post" class="login-form">
+                <form action="" method="post" style="width: 20rem;" class="login-form">
                     {% csrf_token %}
                     <label>Email:</label> {{ form.username }}
                     <label>Password:</label> {{ form.password }}
@@ -42,7 +42,7 @@
         const password = document.getElementById('password').value;
         const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/v1/token', {
+            const response = await fetch('http://127.0.0.1:8000/api/v1/token/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,13 +57,13 @@
             });
 
             const data = await response.json();
-            console.log('Response:', data);
 
             if (response.ok) {
                 const token = data.token;
                 localStorage.setItem('token', token);
-                console.log('Token stored:', token);
-                window.location.href = '/dashboard/'
+                if (data.SuperRole) {} else {
+                    window.location.href = '/dashboard/';
+                }
             } else {
                 console.error('Error:', data);
             }

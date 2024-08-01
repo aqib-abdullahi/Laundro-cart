@@ -141,7 +141,7 @@ requestOrder.addEventListener('click', function(event) {
         }
     });
     const token = localStorage.getItem('token');
-    fetch('http://127.0.0.1:8000/api/v1/request-pickup', {
+    fetch('http://127.0.0.1:8000/api/v1/request-pickup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

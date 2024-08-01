@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from . import forms
 from django.contrib import messages
@@ -44,6 +45,7 @@ def view_login(request):
         form = forms.LoginForm()
     return render(request, 'login.html', {'form': form})
 
+@login_required
 def logout_view(request):
-    logout(request)
+    logout(request.user)
     return redirect('login')

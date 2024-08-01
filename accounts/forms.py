@@ -45,9 +45,8 @@ class SignUpForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
 
     def email_clean(self):
-        email = self.cleaned_data['email'].lower()
-        new = User.objects.filter(email=email)
-        if new.count():
+        email = self.cleaned_data['email'].strip().lower()
+        if User.objects.filter(email=email).exists():
             raise ValidationError("Email Already Exists")
         return email
 
@@ -62,8 +61,10 @@ class SignUpForm(UserCreationForm):
 
     def save(self, commit=True):
         user = User.objects.create_user(
-            self.cleaned_data['email'],
-            self.cleaned_data['password1']
+            email=self.cleaned_data['email'],
+            password=self.cleaned_data['password1'],
+            first_name=self.cleaned_data['first_name'],
+            last_name=self.cleaned_data['last_name'],
         )
         return user
 

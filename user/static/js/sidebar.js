@@ -10,13 +10,15 @@ logoutbtn.addEventListener('click', function(event) {
                 'X-CSRFToken': csrfToken,
                 'Authorization': `Token ${token}`
             },
-            credentials: 'include'
+            credentials: 'same-origin'
         })
         .then(response => {
-            response.text()
+            console.log(response);
+            if (response.ok) {
+                window.location.href = "/accounts/login/";
+                localStorage.removeItem('token');
+            }
         })
-        .then(data => {
-            window.location.href = '/login/';
-        })
+        .then(data => {})
         .catch(error => console.error('Error:', error));
 })
