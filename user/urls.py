@@ -9,6 +9,7 @@ urlpatterns = [
     path('pickup/', views.pickup, name="pickup"),
     path('profile/', views.profile, name="profile"),
     path('notifications/', views.notifications, name="notifications"),
+    path('orders/', views.orders, name="orders"),
 ]
 
 if settings.DEBUG:

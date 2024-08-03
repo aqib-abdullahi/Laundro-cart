@@ -27,3 +27,7 @@ def profile(request):
 @login_required
 def notifications(request):
     return render(request, 'notifications.html')
+
+@login_required
+def orders(request):
+    return render(request, 'orders.html')

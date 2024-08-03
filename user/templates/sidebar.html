@@ -17,6 +17,11 @@
             <div class="barname">Notifications</div>
         </div>
     </a>
+    <a href="{% url 'orders' %}">
+        <div class="orders {% if request.path == '/orders/' %}active{% endif %}"><i class="fa-solid fa-clipboard-list"></i>
+            <div class="barname">Orders</div>
+        </div>
+    </a>
     <a href="" class="logoutbtn">
         <div class="logout {% if request.path == '/logout' %}active{% endif %}"><i class="fa-solid fa-arrow-right-from-bracket"></i>
             <div class="barname">Logout</div>
@@ -24,6 +29,7 @@
     </a>
 </aside>
 <style>
+    .orders.active,
     .pickup.active,
     .notifications.active,
     .profile.active,
@@ -31,6 +37,7 @@
         background-color: rgb(178, 219, 250);
     }
     
+    .orders,
     .profile,
     .notifications,
     .logout,

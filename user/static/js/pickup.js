@@ -26,12 +26,20 @@ previewCountButton.onclick = function() {
     updateModal();
 }
 
+previewCountButton.disabled = true;
+
 function updateCheckoutCounter() {
     let total = 0;
     const counters = document.querySelectorAll('.counter');
 
     counters.forEach(function(counter) {
         total += parseInt(counter.textContent, 10);
+        if (total === 0) {
+            previewCountButton.disabled = true;
+        } else {
+            previewCountButton.disabled = false;
+        }
+
     });
     previewCountButton.style.setProperty("--count", `"${total}"`);
 };
@@ -115,7 +123,6 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 const requestOrder = document.querySelector('.proceed-pay');
 requestOrder.addEventListener('click', function(event) {
     event.preventDefault();
@@ -140,8 +147,9 @@ requestOrder.addEventListener('click', function(event) {
             });
         }
     });
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
     const token = localStorage.getItem('token');
-    fetch('http://127.0.0.1:8000/api/v1/request-pickup/', {
+    fetch('http://127.0.0.1:8000/api/v1/request-pickup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -151,13 +159,13 @@ requestOrder.addEventListener('click', function(event) {
             body: JSON.stringify({
                 items: allItems
             }),
-            credentials: 'include'
+            credentials: 'same-origin'
         })
         .then(response => {
             response.text()
         })
         .then(data => {
-            window.location.href = '/notifications/';
+            window.location.href = '/orders/';
         })
         .catch(error => console.error('Error:', error));
 });

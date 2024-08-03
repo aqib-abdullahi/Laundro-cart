@@ -28,6 +28,7 @@ a .pickup {
     border-right: none;
 }
 
+.orders,
 .user,
 .pickup,
 .profile,
@@ -42,6 +43,7 @@ a .pickup {
     height: 40%;
 }
 
+.orders,
 .pickup,
 .profile,
 .notifications,
@@ -74,6 +76,13 @@ a .logout {
     border-right: none;
 }
 
+a .orders {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+.orders:hover,
 .pickup:hover,
 .profile:hover,
 .notifications:hover,
