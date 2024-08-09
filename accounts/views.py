@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from rest_framework.authtoken.models import Token
 from django.http import HttpResponse
 from . import forms
 from django.contrib import messages
@@ -34,9 +35,14 @@ def view_login(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
+                token, created = Token.objects.get_or_create(user=user)
+                # response = HttpResponse("successfully logged in!")
+                # response.set_cookie('authToken', token.key, httponly=True, secure=True, samesite='Lax')
                 if not user.is_superuser:
-                    return redirect('dashboard')
-                return HttpResponse("successfully logged ib!")
+                    response = redirect('dashboard')
+                    response.set_cookie('authToken', token.key, httponly=True)
+                    return response
+                return HttpResponse("successfully logged in!")
             else:
                 messages.error(request, 'Invalid email or password')
         else:
@@ -46,6 +52,7 @@ def view_login(request):
     return render(request, 'login.html', {'form': form})
 
 @login_required
+@ensure_csrf_cookie
 def logout_view(request):
-    logout(request.user)
+    logout(request)
     return redirect('login')

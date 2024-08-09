@@ -1,3 +1,11 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const token = getCookie('auth_token');
+    if (token) {
+        localStorage.setItem('token', token);
+    }
+});
+
+
 const modalOverlay = document.querySelector('.checkout-preview');
 const modal = document.querySelector('.checkout-box')
 const closebtn = document.querySelector('.cancel-modal');
@@ -147,8 +155,10 @@ requestOrder.addEventListener('click', function(event) {
             });
         }
     });
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-    const token = localStorage.getItem('token');
+    // const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    // const token = localStorage.getItem('token');
+    const token = getCookie('authToken');
     fetch('http://127.0.0.1:8000/api/v1/request-pickup', {
             method: 'POST',
             headers: {
@@ -159,13 +169,15 @@ requestOrder.addEventListener('click', function(event) {
             body: JSON.stringify({
                 items: allItems
             }),
-            credentials: 'same-origin'
+            credentials: 'include'
         })
         .then(response => {
             response.text()
         })
         .then(data => {
-            window.location.href = '/orders/';
+            console.log(csrfToken);
+            console.log(token);
+            // window.location.href = '/orders/';
         })
         .catch(error => console.error('Error:', error));
 });

@@ -22,11 +22,12 @@
             <div class="barname">Orders</div>
         </div>
     </a>
-    <a href="" class="logoutbtn">
+    <a href="{% url 'logout' %}" class="logoutbtn">
         <div class="logout {% if request.path == '/logout' %}active{% endif %}"><i class="fa-solid fa-arrow-right-from-bracket"></i>
             <div class="barname">Logout</div>
         </div>
     </a>
+    {% csrf_token %}
 </aside>
 <style>
     .orders.active,

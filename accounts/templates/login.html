@@ -17,7 +17,7 @@
                 {% if form.errors %}
                 <p style="float: left; margin: 0; padding: 0; color: white; font-size: 1.1rem; text-align: center; width: 50%; position: absolute; top: 0; left: 0; background-color: red;">Invalid email or password!</p>
                 {% endif %}
-                <form action="" method="post" style="width: 20rem;" class="login-form">
+                <form action="{% url 'login' %}" method="post" style="width: 20rem;" class="login-form">
                     {% csrf_token %}
                     <label>Email:</label> {{ form.username }}
                     <label>Password:</label> {{ form.password }}

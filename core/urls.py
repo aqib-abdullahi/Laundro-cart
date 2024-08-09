@@ -4,5 +4,4 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="core"),
-    path('api/', include('core.api.urls')),
 ]
