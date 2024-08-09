@@ -44,7 +44,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
 
-    def email_clean(self):
+    def clean_email(self):
         email = self.cleaned_data['email'].strip().lower()
         if User.objects.filter(email=email).exists():
             raise ValidationError("Email Already Exists")

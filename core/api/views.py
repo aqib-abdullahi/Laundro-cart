@@ -1,14 +1,16 @@
+import json
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from core.models import Order, Laundry
-from .serializers import OrderSerializer
+from .serializers import OrderSerializer, SignUpSerializer
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt, csrf_protect
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import authenticate,logout, login
+from django.contrib.auth import authenticate,logout, login,get_user_model
+from django.contrib.auth.models import User
 
-
+User = get_user_model()
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -17,11 +19,12 @@ def user_login_token(request):
     if request.method == 'POST':
         email = request.data.get('Email')
         password = request.data.get('Password')
-        user =  authenticate(username=email, password=password)
-        if user:
-            login(request, user)
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key, 'SuperRole': user.is_superuser}, status=status.HTTP_200_OK)
+        current_user =  authenticate(request, username=email, password=password)
+        if current_user:
+            login(request, current_user)
+            token, created = Token.objects.get_or_create(user=current_user)
+            response = Response({'token': token.key, 'SuperRole': current_user.is_superuser}, status=status.HTTP_200_OK)
+            return response
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
@@ -32,7 +35,10 @@ def user_logout_token(request):
         try:
             request.user.auth_token.delete()
             logout(request)
-            return Response({'message': 'successfully logged out'}, status=status.HTTP_200_OK)
+            response = Response({'message': 'successfully logged out'}, status=status.HTTP_200_OK)
+            response.delete_cookie('csrftoken')
+            response.delete_cookie('sessionid')
+            return response
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -41,22 +47,26 @@ def user_logout_token(request):
 @permission_classes([IsAuthenticated])
 def create_pickup_order(request):
     if request.method == 'POST':
-        if request.user.is_authenticated:
+        current_user = request.user
+        if current_user.is_authenticated:
             try:
                 items = request.data.get('items', [])
                 if items is None:
                     return Response({'success': False, 'error': 'No items ordered'},
                                     status=status.HTTP_400_BAD_REQUEST)
                 orders = []
-                print(items)
                 for item in items:
                     try:
                         laundry_item = Laundry.get_laundry_by_id(id=item['id'])
+                        if not current_user.address or not current_user.phone_number:
+                            raise ValueError('User address or phone number is missing')
                         order = Order.objects.create(
-                            user = request.user,
+                            user = current_user,
                             laundry = laundry_item,
                             quantity = item.get('quantity'),
-                            cost = laundry_item.price * item.get('quantity')
+                            cost = laundry_item.price * item.get('quantity'),
+                            address= current_user.address,
+                            phone= current_user.phone_number
                         )
                         orders.append(order)
                     except Exception as e:
@@ -68,3 +78,14 @@ def create_pickup_order(request):
             except Exception as e:
                 return Response({'success': False, 'error': str(e)},
                                 status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def signup_api(request):
+    if request.method == 'POST':
+        serializer = SignUpSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

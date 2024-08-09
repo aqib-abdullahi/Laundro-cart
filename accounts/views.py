@@ -13,9 +13,12 @@ def signup(request):
     if request.method == "POST":
         form = forms.SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'account created successfully')
-            return redirect('login')
+            print("valid form")
+            try:
+                user = form.save()
+                return redirect('login')
+            except Exception as e:
+                print(f"error: {e}")
         else:
             messages.error(request, 'Invalid entry')
     else:

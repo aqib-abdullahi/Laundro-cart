@@ -5,19 +5,20 @@ loginForm.addEventListener('submit', async(event) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+    // const csrfToken = getCookie('csrftoken');
     try {
         const response = await fetch('http://127.0.0.1:8000/api/v1/token/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken,
-                'Authorization': 'Basic ' + btoa(email + ':' + password),
+                // 'Authorization': 'Basic ' + btoa(email + ':' + password),
             },
             body: JSON.stringify({
                 Email: email,
                 Password: password
             }),
-            credentials: 'same-origin'
+            credentials: 'include'
         });
 
         const data = await response.json();
@@ -25,8 +26,19 @@ loginForm.addEventListener('submit', async(event) => {
         if (response.ok) {
             const token = data.token;
             localStorage.setItem('token', token);
-            if (data.SuperRole) {} else {
+            console.log('token set');
+            if (data.SuperRole) {
+                console.log("administrator login");
+            } else {
+                console.log('user logging in');
+                // setTimeout(2000);
+
+                // document.cookie = `csrftoken=${getCookie('csrftoken')}; HttpOnly`;
+                // document.cookie = `sessionid=${getCookie('sessionid')}; HttpOnly`;
                 window.location.href = '/dashboard/';
+                console.log(data.token);
+                // console.log('logged in');
+
             }
         } else {
             console.error('Error:', data);
