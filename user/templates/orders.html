@@ -2,17 +2,38 @@
 <div class="dash-contents">
     <div class="profile-settings">
         <h1>Orders</h1>
-        <div class="orders-container"></div>
-    </div>
+        <div class="orders-container">
+            <div id="orders" class="tabcontent">
+                <h3>Orders</h3>
+                <div class="label">
+                    <div class="item-image-label"></div>
+                    <div class="item-name-label">Name</div>
+                    <div class="item-description-label">Description</div>
+                    <div class="item-count-label">Quantity</div>
+                    <div class="item-cost-label">Price</div>
+                </div>
 
-</div>
-<style>
-    .orders-container {
-        width: 95%;
-        height: auto;
-        min-height: 50px;
-        background-color: #bdbcbcc3;
-        border-radius: 10px;
-    }
-</style>
-{% endblock %}
+                <div class="item">
+                    <div class="item-name"></div>
+                    <div class="item-description"></div>
+                    <div class="item-count">
+                        <button class="btn decrease" data-id=""><i class="fa-solid fa-minus fa-2xs"></i></button>
+                        <p class="counter" data-id="">0</p>
+                        <button class="btn increase" data-id=""><i class="fa-solid fa-plus fa-2xs"></i></button>
+                    </div>
+                    <div class="item-cost">N</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <style>
+        .orders-container {
+            width: 95%;
+            height: auto;
+            min-height: 50px;
+            background-color: #bdbcbcc3;
+            border-radius: 10px;
+        }
+    </style>
+    {% endblock %}

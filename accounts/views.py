@@ -34,13 +34,12 @@ def view_login(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=email, password=password)
             if user is not None:
+                Token.objects.filter(user=user).delete()
+                token = Token.objects.create(user=user)
                 login(request, user)
-                token, created = Token.objects.get_or_create(user=user)
-                # response = HttpResponse("successfully logged in!")
-                # response.set_cookie('authToken', token.key, httponly=True, secure=True, samesite='Lax')
                 if not user.is_superuser:
-                    response = redirect('dashboard')
-                    response.set_cookie('authToken', token.key, httponly=True)
+                    response = redirect('pickup')
+                    response.set_cookie('authToken', token.key)
                     return response
                 return HttpResponse("successfully logged in!")
             else:

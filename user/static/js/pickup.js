@@ -155,9 +155,8 @@ requestOrder.addEventListener('click', function(event) {
             });
         }
     });
-    // const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-    // const token = localStorage.getItem('token');
+
+    const csrfToken = getCookie('csrftoken');
     const token = getCookie('authToken');
     fetch('http://127.0.0.1:8000/api/v1/request-pickup', {
             method: 'POST',
@@ -175,9 +174,7 @@ requestOrder.addEventListener('click', function(event) {
             response.text()
         })
         .then(data => {
-            console.log(csrfToken);
-            console.log(token);
-            // window.location.href = '/orders/';
+            window.location.href = '/orders/';
         })
         .catch(error => console.error('Error:', error));
 });
