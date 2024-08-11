@@ -1,28 +1,27 @@
-{% extends 'base_user_dashboard.html' %} {% block title %} Orders {% endblock %} {% block content %}
+{% extends 'base_user_dashboard.html' %} {% block title %} Orders {% endblock %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/orders.css' %}">
 <div class="dash-contents">
     <div class="profile-settings">
         <h1>Orders</h1>
         <div class="orders-container">
             <div id="orders" class="tabcontent">
-                <h3>Orders</h3>
-                <div class="label">
-                    <div class="item-image-label"></div>
-                    <div class="item-name-label">Name</div>
-                    <div class="item-description-label">Description</div>
-                    <div class="item-count-label">Quantity</div>
-                    <div class="item-cost-label">Price</div>
-                </div>
-
-                <div class="item">
-                    <div class="item-name"></div>
-                    <div class="item-description"></div>
-                    <div class="item-count">
-                        <button class="btn decrease" data-id=""><i class="fa-solid fa-minus fa-2xs"></i></button>
-                        <p class="counter" data-id="">0</p>
-                        <button class="btn increase" data-id=""><i class="fa-solid fa-plus fa-2xs"></i></button>
+                <ul>
+                    {% for order in user_orders %}
+                    <div class="morders">
+                        <li>
+                            <strong>ID: </strong> {{ order.order_group }}<br>
+                            <strong>Date: </strong> {{ order.date|date:"d-M-Y" }}<br>
+                            <strong>Cost: </strong> N{{ order.total_cost }}<br>
+                            <strong>Status: </strong> {{ order.status }}<br>
+                            <a href="#">View Details</a>
+                        </li>
+                        {% empty %}
+                        <li>No orders yet.</li>
+                        {% endfor %}
                     </div>
-                    <div class="item-cost">N</div>
-                </div>
+
+                </ul>
+
             </div>
         </div>
 

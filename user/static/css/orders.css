@@ -1,0 +1,22 @@
+.label {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 1rem;
+}
+
+.item {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 1rem;
+}
+
+.morders {
+    background-color: aliceblue;
+    margin-top: 20px;
+    /* margin-bottom: 40px; */
+}

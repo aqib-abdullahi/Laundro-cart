@@ -9,6 +9,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt, csrf_pr
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate,logout, login,get_user_model
 from django.contrib.auth.models import User
+from django.utils import timezone
+import uuid
 
 
 User = get_user_model()
@@ -26,8 +28,12 @@ def create_pickup_order(request):
                 if items is None:
                     return Response({'success': False, 'error': 'No items ordered'},
                                     status=status.HTTP_400_BAD_REQUEST)
+                
+                order_group_id = uuid.uuid4()     
+
                 orders = []
                 for item in items:
+                    print(order_group_id)
                     print(item)
                     try:
                         laundry_item = Laundry.get_laundry_by_id(id=item['id'])
@@ -35,11 +41,13 @@ def create_pickup_order(request):
                             raise ValueError('User address or phone number is missing')
                         order = Order.objects.create(
                             user = current_user,
+                            order_group = order_group_id,
                             laundry = laundry_item,
                             quantity = item.get('quantity'),
                             cost = laundry_item.price * item.get('quantity'),
                             address= current_user.address,
-                            phone= current_user.phone_number
+                            phone= current_user.phone_number,
+                            date = timezone.now()
                         )
                         orders.append(order)
                     except Exception as e:

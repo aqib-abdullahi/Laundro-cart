@@ -8,4 +8,5 @@ User = get_user_model()
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = "__all__"
+        fields = ['id', 'user', 'order_group', 'laundry', 'quantity', 'cost', 'address', 'phone', 'date', 'status']
+
