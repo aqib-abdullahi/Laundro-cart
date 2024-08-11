@@ -2,7 +2,6 @@ import datetime
 from django.utils import timezone
 from django.db import models
 from django.conf import settings
-import uuid
 
 
 class Category(models.Model):
@@ -48,14 +47,13 @@ class Laundry(models.Model):
 class Order(models.Model):
     """Orders"""
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    order_group = models.UUIDField(default=uuid.uuid4, editable=False, unique=False)
     laundry = models.ForeignKey(Laundry, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     cost = models.IntegerField()
     address = models.CharField(max_length=50, default='', blank=True)
     phone = models.CharField(max_length=50, default='', blank=True)
-    date = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=50, default='Pending', choices=[
+    date = models.DateTimeField(default=timezone.make_aware(datetime.datetime.now()))
+    status = models.CharField(max_length=50, default=False, choices=[
         ('Pending', 'Pending'),
         ('Processing', 'Processing'),
         ('Completed', 'Completed'),
@@ -66,13 +64,6 @@ class Order(models.Model):
         return f"Order {self.id} by {self.user.email}"
 
     @staticmethod
-    def get_orders_by_user_id(user_id):
+    def get_orders_by_user(user):
         """returns orders by a customer based on user"""
-        return Order.objects.filter(user_id=user_id)
-    
-    @staticmethod
-    def get_orders_by_group_id(request, order_group_id):
-        """returns orders based on given order group id
-        (order requests made at once)
-        """
-        return Order.objects.filter(order_group=order_group_id, user=request.user)
+        return Order.Objects.filter(user=user).order_by('-date')
