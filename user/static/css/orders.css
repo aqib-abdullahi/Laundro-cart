@@ -16,7 +16,34 @@
 }
 
 .morders {
-    background-color: aliceblue;
-    margin-top: 20px;
-    /* margin-bottom: 40px; */
+    background-color: #e3e3e3;
+    margin: 10px auto 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    border: none;
+    border-radius: 20px;
+    width: 90%;
+}
+
+.orders-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 95%;
+    height: auto;
+    min-height: 50px;
+    background-color: #bdbcbcc3;
+    border-radius: 10px;
+}
+
+.details {
+    padding: 10px 13px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    border-radius: 7px;
+    background-color: rgb(44, 117, 60);
+    color: #e3e3e3;
+    border: none;
+    font-family: 'Josefin Sans', sans-serif;
 }

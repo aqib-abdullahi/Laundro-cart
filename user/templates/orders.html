@@ -5,34 +5,20 @@
         <h1>Orders</h1>
         <div class="orders-container">
             <div id="orders" class="tabcontent">
-                <ul>
-                    {% for order in user_orders %}
-                    <div class="morders">
-                        <li>
-                            <strong>ID: </strong> {{ order.order_group }}<br>
-                            <strong>Date: </strong> {{ order.date|date:"d-M-Y" }}<br>
-                            <strong>Cost: </strong> N{{ order.total_cost }}<br>
-                            <strong>Status: </strong> {{ order.status }}<br>
-                            <a href="#">View Details</a>
-                        </li>
-                        {% empty %}
-                        <li>No orders yet.</li>
-                        {% endfor %}
-                    </div>
+                {% for order in user_orders %}
+                <div class="morders">
+                    <p><strong>Order no.: </strong> {{ order.order_no }}<br></p>
+                    <p><strong>Order date: </strong> {{ order.order_date|date:"d-M-Y H:i" }}<br></p>
+                    <p><strong>Total items: </strong> {{ order.total_items }}<br></p>
+                    <p><strong>Total cost: </strong> N{{ order.total_cost }}<br></p>
+                    <p><strong>Status: </strong> {{ order.status }}<br></p>
+                    <p><button class="details">View Details</button></p>
+                </div>
+                {% endfor %}
 
-                </ul>
 
             </div>
         </div>
 
     </div>
-    <style>
-        .orders-container {
-            width: 95%;
-            height: auto;
-            min-height: 50px;
-            background-color: #bdbcbcc3;
-            border-radius: 10px;
-        }
-    </style>
     {% endblock %}
