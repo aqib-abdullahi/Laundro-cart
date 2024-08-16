@@ -33,16 +33,6 @@ def notifications(request):
 def orders(request):
     user = request.user
     user_orders = GroupedOrder.objects.filter(user=user).order_by('-date')
-    # user_orders = (Order.objects
-    #                .filter(user=user)
-    #                .values('order_group')
-    #                .annotate(
-    #                    total_cost=Sum('cost'),
-    #                    total_items=Count('id'),
-    #                    order_date=Min('date'),
-    #                    status=Max('status'))
-    #                 .order_by('-order_date')
-    #                )
     context = {
         'user_orders': user_orders
     }
