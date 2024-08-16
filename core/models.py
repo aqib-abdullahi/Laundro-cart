@@ -83,3 +83,31 @@ class Order(models.Model):
         (order requests made at once)
         """
         return Order.objects.filter(order_group=order_group_id, user=request.user)
+
+class GroupedOrder(models.Model):
+    """grouped orders made at an instant in time"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    order_no = models.CharField(max_length=6, unique=True)
+    order_group = models.UUIDField(default=uuid.uuid4, editable=False, unique=False)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    total_items = models.IntegerField()
+    address = models.CharField(max_length=50, default='', blank=True)
+    phone = models.CharField(max_length=50, default='', blank=True)
+    date = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=50, default='Pending', choices=[
+        ('Pending', 'Pending'),
+        ('Processing', 'Processing'),
+        ('Completed', 'Completed'),
+        ('Cancelled','Cancelled'),
+    ])
+
+    def save(self, *args, **kwargs):
+        if not self.order_no:
+            self.order_no = self.generate_order_no()
+        super().save(*args, **kwargs)
+            
+    def generate_order_no(self):
+        return str(uuid.uuid4().int)[:6]
+    
+    def __str__(self):
+        return f"Grouped Order {self.order_no} by {self.user.email}"

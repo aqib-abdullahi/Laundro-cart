@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
-from core.models import Laundry, Order
+from core.models import Laundry, Order, GroupedOrder
 from django.db.models import Sum, Count, Min, Max
 
 
@@ -32,15 +32,17 @@ def notifications(request):
 @login_required
 def orders(request):
     user = request.user
-    user_orders = (Order.objects
-                   .filter(user=user)
-                   .values('order_no','order_group')
-                   .annotate(
-                       total_cost=Sum('cost'),
-                       total_items=Count('id'),
-                       order_date=Min('date'),
-                       status=Max('status'))
-                   )
+    user_orders = GroupedOrder.objects.filter(user=user).order_by('-date')
+    # user_orders = (Order.objects
+    #                .filter(user=user)
+    #                .values('order_group')
+    #                .annotate(
+    #                    total_cost=Sum('cost'),
+    #                    total_items=Count('id'),
+    #                    order_date=Min('date'),
+    #                    status=Max('status'))
+    #                 .order_by('-order_date')
+    #                )
     context = {
         'user_orders': user_orders
     }

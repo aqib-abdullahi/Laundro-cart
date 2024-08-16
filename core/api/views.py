@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
-from core.models import Order, Laundry
+from core.models import Order, Laundry, GroupedOrder
 from .serializers import OrderSerializer
 from django.views.decorators.csrf import ensure_csrf_cookie,csrf_exempt, csrf_protect
 from rest_framework.authtoken.models import Token
@@ -31,7 +31,10 @@ def create_pickup_order(request):
                 
                 order_group_id = uuid.uuid4()     
 
+                total_cost = 0
+                total_items = 0
                 orders = []
+
                 for item in items:
                     print(order_group_id)
                     print(item)
@@ -49,10 +52,25 @@ def create_pickup_order(request):
                             phone= current_user.phone_number,
                             date = timezone.now()
                         )
+                        total_cost += order.cost
+                        total_items += order.quantity
                         orders.append(order)
+
                     except Exception as e:
                         return Response({'success': False, 'error': f'Error processing item {item["id"]}: {e}'},
                                         status=status.HTTP_400_BAD_REQUEST)
+
+                grouped_order = GroupedOrder.objects.create(
+                    user = current_user,
+                    order_group = order_group_id,
+                    total_cost = total_cost,
+                    address = current_user.address,
+                    phone = current_user.phone,
+                    total_items = total_items,
+                    date = timezone.now(),
+                    status = 'Pending'
+                )
+                    
                 serializer = OrderSerializer(orders, many=True)
                 return Response({'success': True, 'orders': serializer.data},
                                     status = status.HTTP_201_CREATED)
