@@ -1,7 +1,16 @@
-{% extends 'base_user_dashboard.html' %} {% block title %} Profile {% endblock %} {% block content %}
+{% extends 'base_user_dashboard.html' %} {% block title %} Profile {% endblock %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 <div class="dash-contents">
     <div class="profile-settings">
         <h1>Profile</h1>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        </div>
+
+        {% endif %}
         <form action="{% url 'profile' %}" method="post">
             {% csrf_token %}
             <div class="inputs">

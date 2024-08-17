@@ -205,8 +205,9 @@
 .item-cost {
     background-color: #f1f1f1;
     width: 20%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 

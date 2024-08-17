@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
 from core.models import Laundry, Order, GroupedOrder
-from django.db.models import Sum, Count, Min, Max
+from django.contrib import messages
+from .decorators import profile_completion_required
 
 
 @login_required
 def user_dashboard(request):
     return render(request, "user_dashboard.html")
 
+@profile_completion_required
 @login_required
 def pickup(request):
     laundry_items = Laundry.get_all_laundry()
@@ -20,6 +22,7 @@ def profile(request):
         form = ProfileUpdateForm(request.POST, instance=request.user)
         if form.is_valid:
             form.save()
+            messages.success(request, 'Profile updated successfully')
             return redirect('profile')
     else:
         form = ProfileUpdateForm(instance=request.user)

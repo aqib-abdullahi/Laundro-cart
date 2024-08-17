@@ -9,7 +9,7 @@ class CustomUserManager(BaseUserManager):
     def _create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Email must be set')
-        email = self.normalize_email(email)
+        email = self.normalize_email(email.lower())
         user = self.model(email=email, **kwargs)
         user.set_password(password)
         user.save(using=self._db)
@@ -41,6 +41,7 @@ class CustomUser(AbstractUser, PermissionsMixin):
     address = models.CharField(max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    profile_completed = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
