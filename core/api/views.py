@@ -55,7 +55,13 @@ def create_pickup_order(request):
                         total_cost += order.cost
                         total_items += order.quantity
                         orders.append(order)
-
+                    
+                    except ValueError as e:
+                        return Response({'success': False, 'error': str(e)},
+                                        status=status.HTTP_400_BAD_REQUEST)
+                    except KeyError as e:
+                        return Response({'success': False, 'error': f'Missing key: {str(e)}'},
+                                        status=status.HTTP_400_BAD_REQUEST)
                     except Exception as e:
                         return Response({'success': False, 'error': f'Error processing item {item["id"]}: {e}'},
                                         status=status.HTTP_400_BAD_REQUEST)
@@ -65,7 +71,7 @@ def create_pickup_order(request):
                     order_group = order_group_id,
                     total_cost = total_cost,
                     address = current_user.address,
-                    phone = current_user.phone,
+                    phone = current_user.phone_number,
                     total_items = total_items,
                     date = timezone.now(),
                     status = 'Pending'

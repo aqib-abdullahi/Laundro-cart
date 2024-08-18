@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, BaseUserManager, AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth import get_user_model
+from accounts.models import CustomUser
 
 
 User = get_user_model()
@@ -45,9 +46,9 @@ class SignUpForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
 
     def email_clean(self):
-        email = self.cleaned_data['email'].strip().lower()
-        if User.objects.filter(email=email).exists():
-            raise ValidationError("Email Already Exists")
+        email = self.cleaned_data['email'].lower()
+        if CustomUser.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email Already Exists")
         return email
 
     def clean_password2(self):

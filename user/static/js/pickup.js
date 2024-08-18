@@ -1,11 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const token = getCookie('auth_token');
-    if (token) {
-        localStorage.setItem('token', token);
-    }
-});
-
-
 const modalOverlay = document.querySelector('.checkout-preview');
 const modal = document.querySelector('.checkout-box')
 const closebtn = document.querySelector('.cancel-modal');
