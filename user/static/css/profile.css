@@ -11,6 +11,12 @@
     border-color: #d6e9c6;
 }
 
+.alert-warning {
+    color: #763c3c;
+    background-color: #eeb4b4;
+    border-color: #e9c6c6;
+}
+
 .messages {
     width: 95%;
 }

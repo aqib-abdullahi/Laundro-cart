@@ -7,6 +7,8 @@
         <div class="messages">
             {% for message in messages %} {% if message.tags == 'success' %}
             <div class="alert alert-success">{{ message }}</div>
+            {% endif %} {% if message.tags == 'warning' %}
+            <div class="alert alert-warning">{{ message }}</div>
             {% endif %} {% endfor %}
         </div>
 

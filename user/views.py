@@ -18,13 +18,18 @@ def pickup(request):
 
 @login_required
 def profile(request):
+    user = request.user
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, instance=request.user)
         if form.is_valid:
             form.save()
+            if not user.address or not user.phone_number:
+                messages.warning(request, 'Please complete your profile!')
             messages.success(request, 'Profile updated successfully!')
             return redirect('profile')
     else:
+        if not user.address or not user.phone_number:
+            messages.warning(request, 'Please complete your profile!')
         form = ProfileUpdateForm(instance=request.user)
     return render(request, 'profile.html', {'form': form})
 

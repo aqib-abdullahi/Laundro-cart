@@ -15,7 +15,6 @@ def signup(request):
         form = forms.SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'account created successfully')
             return redirect('login')
         else:
             messages.error(request, 'Invalid entry')

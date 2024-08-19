@@ -45,25 +45,24 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
 
-    def email_clean(self):
+    def clean_email(self):
         email = self.cleaned_data['email'].lower()
         if CustomUser.objects.filter(email=email).exists():
             raise forms.ValidationError("Email Already Exists")
         return email
 
     def clean_password2(self):
-        password1 = self.cleaned_data['password1']
-        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
 
-        if password1 and password2:
-            if password1 != password2:
-                raise ValidationError("Passwords don't match")
-            return password2
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Passwords don't match")
+        return password2
 
     def save(self, commit=True):
-        user = User.objects.create_user(
+        user = CustomUser.objects.create_user(
             email=self.cleaned_data['email'],
-            password=self.cleaned_data['password1'],
+            password=self.cleaned_data['password2'],
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
         )
