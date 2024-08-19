@@ -41,6 +41,8 @@
                         <p>{{ order.status }}</p>
                     </div>
                 </div>
+                {% empty %}
+                <h4>No orders yet.</h4>
                 {% endfor %}
 
 
