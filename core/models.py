@@ -63,6 +63,7 @@ class Order(models.Model):
         ('Cancelled','Cancelled'),
     ])
     order_no = models.CharField(max_length=6, unique=True, editable=False)
+    pickup_date = models.DateField(default=timezone.now, null=True)
 
     def save(self, *args, **kwargs):
         if not self.order_no:
@@ -86,7 +87,7 @@ class Order(models.Model):
 
 class GroupedOrder(models.Model):
     """grouped orders made at an instant in time"""
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     order_no = models.CharField(max_length=6, unique=True)
     order_group = models.UUIDField(default=uuid.uuid4, editable=False, unique=False)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
@@ -100,6 +101,7 @@ class GroupedOrder(models.Model):
         ('Completed', 'Completed'),
         ('Cancelled','Cancelled'),
     ])
+    pickup_date = models.DateField(default=timezone.now, null=True)
 
     def save(self, *args, **kwargs):
         if not self.order_no:

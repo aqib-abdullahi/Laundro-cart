@@ -35,6 +35,12 @@ def create_pickup_order(request):
                 total_items = 0
                 orders = []
 
+                pickup_date = items[0].get('pickup_date', None)
+                if not pickup_date:
+                    return Response({'success': False, 'error': 'Pickup date is required'},
+                                    status=status.HTTP_400_BAD_REQUEST)
+
+
                 for item in items:
                     print(order_group_id)
                     print(item)
@@ -50,19 +56,26 @@ def create_pickup_order(request):
                             cost = laundry_item.price * item.get('quantity'),
                             address= current_user.address,
                             phone= current_user.phone_number,
-                            date = timezone.now()
+                            date = timezone.now(),
+                            pickup_date = pickup_date
+
                         )
                         total_cost += order.cost
                         total_items += order.quantity
                         orders.append(order)
+                        
                     
                     except ValueError as e:
+                        print('valueerrro')
                         return Response({'success': False, 'error': str(e)},
                                         status=status.HTTP_400_BAD_REQUEST)
                     except KeyError as e:
+                        print('key error')
                         return Response({'success': False, 'error': f'Missing key: {str(e)}'},
                                         status=status.HTTP_400_BAD_REQUEST)
                     except Exception as e:
+                        print('exception errro')
+                        print(e)
                         return Response({'success': False, 'error': f'Error processing item {item["id"]}: {e}'},
                                         status=status.HTTP_400_BAD_REQUEST)
 
@@ -74,12 +87,14 @@ def create_pickup_order(request):
                     phone = current_user.phone_number,
                     total_items = total_items,
                     date = timezone.now(),
-                    status = 'Pending'
+                    status = 'Pending',
+                    pickup_date = pickup_date
                 )
                     
                 serializer = OrderSerializer(orders, many=True)
                 return Response({'success': True, 'orders': serializer.data},
                                     status = status.HTTP_201_CREATED)
             except Exception as e:
+                print(' all ueerrro')
                 return Response({'success': False, 'error': str(e)},
                                 status=status.HTTP_400_BAD_REQUEST)

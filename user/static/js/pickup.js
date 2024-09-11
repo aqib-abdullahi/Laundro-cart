@@ -4,10 +4,25 @@ const closebtn = document.querySelector('.cancel-modal');
 const btns = document.querySelectorAll(".btn");
 const previewCountButton = document.querySelector('.preview-count');
 const cancelCheckout = document.querySelector('.cancel-pay');
+const proceedToDate = document.querySelector('.proceed-pickup-date');
+const cancelDateModal = document.querySelector('.cancel-date-modal');
+const pickupDateModal = document.querySelector('.pickup-date-box');
+const pickupDate = document.querySelector('.pickup-date');
+
+
+proceedToDate.onclick = function() {
+    modal.style.display = 'none';
+    pickupDateModal.style.display = 'block';
+}
 
 closebtn.onclick = function() {
     modal.style.display = "none";
-    modalOverlay.style.display = "none"
+    modalOverlay.style.display = "none";
+}
+
+cancelDateModal.onclick = function() {
+    pickupDateModal.style.display = 'none';
+    modalOverlay.style.display = "none";
 }
 
 cancelCheckout.onclick = function() {
@@ -126,6 +141,8 @@ function getCookie(name) {
 const requestOrder = document.querySelector('.proceed-pay');
 requestOrder.addEventListener('click', function(event) {
     event.preventDefault();
+    const dateOfPickup = pickupDate.value;
+
     requestOrder.disabled = true;
     const allItems = [];
     const items = document.querySelectorAll('.item');
@@ -143,7 +160,8 @@ requestOrder.addEventListener('click', function(event) {
                 name: itemName,
                 description: itemDescription,
                 price: itemPrice,
-                quantity: itemQuantity
+                quantity: itemQuantity,
+                pickup_date: dateOfPickup
             });
         }
     });

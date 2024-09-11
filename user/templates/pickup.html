@@ -132,6 +132,23 @@
     {% csrf_token %}
     <div class="proceed">
         <button class="cancel-pay">Add laundry</button>
+        <button type="submit" class="proceed-pickup-date" value="Pickup date">Select Pickup date</button>
+    </div>
+</div>
+
+<div class="pickup-date-box">
+    <div class="top">
+        <h1>Select pickup date</h1>
+        <button class="cancel-date-modal">&times;</button>
+    </div>
+    <div class="basket-label">
+        <input type="date" name="pickup-date" id="pickup-date" class="pickup-date">
+    </div>
+    <div class="basket">
+
+    </div>
+    {% csrf_token %}
+    <div class="proceed">
         <button type="submit" class="proceed-pay" value="Proceed">Proceed</button>
     </div>
 </div>
